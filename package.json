@@ -1,22 +1,20 @@
 {
-  "name": "electron-quick-start",
+  "name": "bloc-that",
   "version": "1.0.0",
-  "description": "A minimal Electron application",
+  "description": "A minimal Electron app built for Bloc",
   "main": "main.js",
   "scripts": {
     "start": "electron ."
   },
-  "repository": "https://github.com/electron/electron-quick-start",
+  "repository": "https://github.com/jestann/node-api.git",
   "keywords": [
-    "Electron",
-    "quick",
-    "start",
-    "tutorial",
-    "demo"
+    "Bloc",
+    "Node.js",
+    "API"
   ],
-  "author": "GitHub",
-  "license": "CC0-1.0",
+  "author": "Jess Bird",
+  "license": "MIT",
   "devDependencies": {
-    "electron": "~1.6.2"
+    "electron": "~1.6.2",
   }
 }

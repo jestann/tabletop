@@ -2,14 +2,22 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Hello World!</title>
+    <title>Bloc That</title>
+    <link rel="stylesheet" type="text/css" href="main.css">
   </head>
   <body>
-    <h1>Hello World!</h1>
-    <!-- All of the Node.js APIs are available in this renderer process. -->
-    We are using Node.js <script>document.write(process.versions.node)</script>,
-    Chromium <script>document.write(process.versions.chrome)</script>,
-    and Electron <script>document.write(process.versions.electron)</script>.
+    <div class="main">
+      <h1>Bloc That</h1>
+      <p>a Bloc desktop app</p>
+      <div>
+        <input id="email" type="text" placeholder="enter your email">
+        <input id="password" type="text" placeholder="enter your password">
+        <div id="submit">Log In</div>
+        <div id="result">returned: 
+          <span id="returned"></span>
+        </div>
+      </div>
+    </div>
   </body>
 
   <script>

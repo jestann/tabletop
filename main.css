@@ -1,0 +1,31 @@
+body {
+  font-family: roboto, sans-serif;
+  color: #333;
+  background: grey;
+}
+
+#submit {
+  padding: 0.666rem;
+  border-radius: 5px;
+  background: #000;
+  margin-bottom: 0.333rem;
+  color: #fff;
+  width: 10%;
+  text-align: center;
+  margin: 10px;
+}
+
+#submit:hover {
+  cursor: pointer;
+  background: grey;
+  color: white;
+}
+
+input {
+  width: 20%;
+  padding: 0.66rem;
+  font-size: 1.3rem;
+  margin-top: 2rem;
+  border-radius: 5px;
+  border-color: #fff;
+}
