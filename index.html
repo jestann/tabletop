@@ -7,21 +7,25 @@
   </head>
   <body>
     <div class="main">
-      <h1>Bloc That</h1>
-      <p>a Bloc desktop app</p>
       <div class="login">
+        <h1>Log in to Bloc</h1>
         <input id="input-email" type="text" placeholder="enter your email">
-        <input id="input-password" type="password" placeholder="enter your password">
-        <div id="submit">Log In</div>
-        <div id="result">token return test: 
-          <span id="returned"></span>
-        </div>
-        <div class="user">
-          <h1>User Information</h1>
-          <div class="user-info" id="user-id"></div>
-          <div class="user-info" id="user-email"></div>
-          <div class="user-info" id="user-created-at"></div>
-        </div>
+         <input id="input-password" type="password" placeholder="enter your password">
+         <div class="submit" id="login-submit">Log In</div>
+         <div id="result">token return test: 
+            <span id="returned"></span>
+         </div>
+      <div class="user">
+         <h1>User Information</h1>
+         <div class="user-info" id="user-id"></div>
+         <div class="user-info" id="user-email"></div>
+         <div class="user-info" id="user-created-at"></div>
+      </div>
+      <div class="mentor">
+         <h1>Mentor Availability</h1>
+         <table id="schedule"></table>
+         <div id="want-box"></div>
+         <button class="submit" id="mentor-submit">Refresh Mentor Availability</button>
       </div>
     </div>
   </body>

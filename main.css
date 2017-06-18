@@ -4,28 +4,70 @@ body {
   background: grey;
 }
 
-#submit {
+.submit {
   padding: 0.666rem;
   border-radius: 5px;
   background: #000;
-  margin-bottom: 0.333rem;
   color: #fff;
   width: 10%;
   text-align: center;
-  margin: 10px;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 
-#submit:hover {
+.submit:hover {
   cursor: pointer;
   background: grey;
   color: white;
 }
 
-input {
+#mentor-submit {
   width: 20%;
+  font-size: 1rem;
+  border: none;
+}
+
+input {
+  width: 30%;
   padding: 0.66rem;
   font-size: 1.3rem;
-  margin-top: 2rem;
   border-radius: 5px;
   border-color: #fff;
+}
+
+.timebox {
+  padding: 1rem;
+  margin: 1rem;
+  border-radius: 5px;
+  background: white;
+  color: grey;
+}
+
+.t-hover:hover {
+  cursor: pointer;
+  background: black;
+  color: white;
+}
+
+.timebox-button {
+  background: tomato;
+  color: white;
+}
+
+.selected {
+  background: black;
+  color: white;
+}
+
+.want-box {
+  background: white;
+  color: grey;
+  border-radius: 5px;
+  width: 20%;
+}
+
+.want-box-claim {
+  font-weight: bold;
+  color: black;
+  font-size: 1.5rem;
 }
