@@ -11,32 +11,16 @@ function initialize (email, password) {
     method: 'POST', 
     headers: {'Content-Type': 'application/json'}, 
     body: JSON.stringify({email: email, password: password})}
-  ).then(
-    response => { response.json().then( data => { 
-      const token = data.auth_token;
-      if (token) { return token; }
-      })
-    }
-  ).catch( error => { console.log(error) })
-}
-
-
-// VIEW functionality for initialize
-
-function initialize (email, password) {
-  const baseUrl = 'https://www.bloc.io/api/v1';
-  fetch(`${baseUrl}/sessions`, {
-    method: 'POST', 
-    headers: {'Content-Type': 'application/json'}, 
-    body: JSON.stringify({email: email, password: password})}
   ).then( 
     response => { response.json().then( data => { 
       const token = data.auth_token;
       if (token) { return token; }
       })
     }
-  ).catch( error => { console.log(error) })
+  ).catch( error => { console.log(error) } );
 }
+
+// VIEW functionality for initialize
 
 let email = "";
 let password = "";
@@ -51,5 +35,9 @@ submit.addEventListener('click', function() {
   password = passwordBox.value;
   authToken = initialize (email, password);
   // authToken = "babjasdjasklfjk";
-  returned.innerHTML = `${authToken}`;
+  if (authToken !== undefined) {
+    returned.innerHTML = `${authToken}`;
+  } else {
+    returned.innerHTML = "error retrieving token";
+  }
 });
