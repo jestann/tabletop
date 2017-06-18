@@ -145,7 +145,10 @@ function updateMentorSchedule () {
       timeBox.appendChild(claim);
       
       claim.addEventListener("click", function(event) {
-        scheduleBox.childNodes.forEach((timeBox) => { timeBox.className = 'timebox t-hover' });
+        scheduleBox.childNodes.forEach((timeBox) => { 
+          timeBox.childNodes[2].className = 'timebox timebox-button';
+          timeBox.childNodes[2].innerHTML = "Claim this Spot!";
+        });
         event.target.className = "timebox selected";
         event.target.innerHTML = "This spot claimed.";
 
