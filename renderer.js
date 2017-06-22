@@ -64,7 +64,7 @@ class Kele {
         method: 'GET',
         headers: {'Content-Type': 'application/json', 'authorization': this.authToken},
         body: `{ "id": ${roadmapId} }`
-      }
+      })
       this.roadmap = await response.map((obj) => JSON.parse(obj))
       return this.roadmap
     }
@@ -77,7 +77,7 @@ class Kele {
         method: 'GET',
         headers: {'Content-Type': 'application/json', 'authorization': this.authToken},
         body: `{ "id": ${checkpointId} }`
-      }
+      })
       this.checkpoint = await response.map((obj) => JSON.parse(obj))
       return this.checkpoint
     }
@@ -93,7 +93,7 @@ class KeleView {
     this.kele = new Kele()
   }
   
-  async initializeView {
+  async initializeView () {
     let email = ''
     let password = ''
 
@@ -105,26 +105,27 @@ class KeleView {
     const userBox = document.getElementsByClassName('user')[0]
     const userInfo = document.getElementById('user-info')
     
+    const mentorBox = document.getElementsByClassName('mentor')[0]
     const roadmapBox = document.getElementsByClassName('roadmap')[0]
     const checkpointBox = document.getElementsByClassName('checkpoint')[0]
     
 
-    async loginListener () {
+    async function loginListener () {
       email = emailBox.value
       password = passwordBox.value
       
       // how to best handle this?
-      kele.authToken = await kele.initialize (email, password)
-      console.log(`auth token retrieved: ${kele.authToken}`)
+      this.kele.authToken = await this.kele.initialize (email, password)
+      console.log(`auth token retrieved: ${this.kele.authToken}`)
       
-      kele.userObject = await kele.getMe(kele.authToken)
-      console.log(kele.userObject)
+      this.kele.userObject = await this.kele.getMe(this.kele.authToken)
+      console.log(this.kele.userObject)
 
-      if (kele.userObject) {
+      if (this.kele.userObject) {
         loginBox.className = 'login hidden'
         
         userBox.className = 'user'
-        userInfo.innerHTML = `Welcome to Bloc ${kele.userObject.name}!`
+        userInfo.innerHTML = `Welcome to Bloc ${this.kele.userObject.name}!`
         
         mentorBox.className = 'mentor'
         roadmapBox.className = 'roadmap'
@@ -136,19 +137,19 @@ class KeleView {
       }
     }
         
-    loginSubmit.addEventListener('click', loginListener)
+    loginSubmit.addEventListener('click', this.loginListener)
   }
   
   async setupMentorView () {
   
     const mentorBox = document.getElementsByClassName('mentor')[0]
-    const mentorSubmit = document.getElementById("mentor-submit");
+    const mentorSubmit = document.getElementById("mentor-submit")
     
-    async refreshMentorView {
-      const scheduleBox = document.getElementById("schedule-id");
-      const wantBox = document.getElementById("want-box-id");
+    async function refreshMentorView () {
+      const scheduleBox = document.getElementById("schedule-id")
+      const wantBox = document.getElementById("want-box-id")
       
-      const schedule = await kele.getMentorAvailability(kele.userObject.mentor_id)
+      const schedule = await this.kele.getMentorAvailability(this.kele.userObject.mentor_id)
       scheduleBox.innerHTML = ''
       wantBox.innerHTML = ''
       
@@ -158,13 +159,13 @@ class KeleView {
         let start = document.createElement('p')
         start.innerHTML = `Starts At: ${availObject.starts_at}`
         let end = document.createElement('p')
-        end.innerHTML = `Ends At: ${availObject.ends_at}`;
-        let claim = document.createElement('div');
-        claim.className = "timebox timebox-button";
-        claim.innerHTML = "Claim this Spot!";
-        timeBox.appendChild(start);
-        timeBox.appendChild(end);
-        timeBox.appendChild(claim);
+        end.innerHTML = `Ends At: ${availObject.ends_at}`
+        let claim = document.createElement('div')
+        claim.className = "timebox timebox-button"
+        claim.innerHTML = "Claim this Spot!"
+        timeBox.appendChild(start)
+        timeBox.appendChild(end)
+        timeBox.appendChild(claim)
       
         claim.addEventListener("click", function(event) {
           scheduleBox.childNodes.forEach((timeBox) => { 
@@ -181,29 +182,29 @@ class KeleView {
           claimedIt.className = "want-box-claim"
           let startTime = document.createElement('p')
           startTime.innerHTML = `Starts At: ${availObject.starts_at}`
-          let endTime = document.createElement('p');
-          endTime.innerHTML = `Ends At: ${availObject.ends_at}`;
-          savedBox.appendChild(claimedIt);
-          savedBox.appendChild(startTime);
-          savedBox.appendChild(endTime);
+          let endTime = document.createElement('p')
+          endTime.innerHTML = `Ends At: ${availObject.ends_at}`
+          savedBox.appendChild(claimedIt)
+          savedBox.appendChild(startTime)
+          savedBox.appendChild(endTime)
   
-          wantBox.innerHTML = "";
-          wantBox.appendChild(savedBox);
+          wantBox.innerHTML = ''
+          wantBox.appendChild(savedBox)
         })
   
-        scheduleBox.appendChild(timeBox);
-      }
+        scheduleBox.appendChild(timeBox)
+      })
     }
     
-    refreshMentorView()
-    mentorSubmit.addEventListener('click', refreshMentorView)
+    await this.refreshMentorView()
+    mentorSubmit.addEventListener('click', this.refreshMentorView)
   }
   
-  async initialize {
-    await initializeView()
-    await refreshMentorView()
-    // refreshRoadmapView()
-    // refreshCheckpointView()
+  async initialize () {
+    await this.initializeView()
+    await this.refreshMentorView()
+    // this.refreshRoadmapView()
+    // this.refreshCheckpointView()
   }
 }
 

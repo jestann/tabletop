@@ -4,6 +4,10 @@ body {
   background: white;
 }
 
+body:child {
+  padding: 20px;
+  margin: 20px;
+}
 
 /* universal styling */
 
@@ -24,32 +28,33 @@ input {
   width: 30%;
   padding: 0.66rem;
   border-radius: 5px;
-  border-color: #fff;
+  box-shadow: none;
   color: gray;
+  margin-right: 10px;
 }
 
 .submit {
   padding: 0.666rem;
   border-radius: 5px;
-  background: lime;
+  background: black;
   color: white;
+  box-shadow: none;
   width: 10%;
   text-align: center;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
+  margin: 1rem;
+  border: none;
 }
 
 .submit:hover {
   cursor: pointer;
-  background: white;
-  color: tomato;
+  background: grey;
 }
 
 
 /* setting up basic layout */
 
 .heading {
-  background: lime;
+  background: #d44825;
   border-radius: 5px;
 }
 
@@ -69,17 +74,20 @@ input {
 }
 
 .login {
-  background: greenyellow;
+  background: #6ab839;
   border-radius: 5px;
+  margin: 20px;
+  padding: 20px;
+  font-size: .75rem;
 }
 
 .user {
-  background: teal;
+  background: #6ab839;
   border-radius: 5px;
 }
 
 .mentor {
-  background: lime;
+  background: #02a17d;
 }
 
 .mentor .submit {
@@ -88,11 +96,11 @@ input {
 }
 
 .roadmap {
-  background: darkviolet;
+  background: #3f8be1;
 }
 
 .checkpoint {
-  background: dodgerblue;
+  background: #1f55e;
 }
 
 
