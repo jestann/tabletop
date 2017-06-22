@@ -1,37 +1,48 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <title>Bloc That</title>
-    <link rel="stylesheet" type="text/css" href="main.css">
-  </head>
-  <body>
-    <div class="main">
-      <div class="login">
-        <h1>Log in to Bloc</h1>
-        <input id="input-email" type="text" placeholder="enter your email">
-         <input id="input-password" type="password" placeholder="enter your password">
-         <div class="submit" id="login-submit">Log In</div>
-         <div id="result">token return test: 
-            <span id="returned"></span>
-         </div>
-      <div class="user">
-         <h1>User Information</h1>
-         <div class="user-info" id="user-id"></div>
-         <div class="user-info" id="user-email"></div>
-         <div class="user-info" id="user-created-at"></div>
-      </div>
-      <div class="mentor">
-         <h1>Mentor Availability</h1>
-         <table id="schedule"></table>
-         <div id="want-box"></div>
-         <button class="submit" id="mentor-submit">Refresh Mentor Availability</button>
-      </div>
-    </div>
-  </body>
+    <head>
+        <meta charset="UTF-8">
+        <title>Bloc That</title>
+        <link rel="stylesheet" type="text/css" href="main.css">
+    </head>
+    <body>
+        <div class="heading">
+            <div class="welcome">Welcome to Kele!</div>
+            <div class="description">a Bloc Desktop app!</div>
+        </div>
+        <div class="main">
+            <div class="login">
+                <h1>Log in to Bloc</h1>
+                <input id="input-email" type="text" placeholder="enter your email">
+                <input id="input-password" type="password" placeholder="enter your password">
+                <button class="submit" id="login-submit">Log In</button>
+            </div>
+            <div class="user hidden">
+                <div id="user-info"></div>
+            </div>
+            <div class="mentor hidden">
+                <h1>Mentor Availability</h1>
+                <button class="submit" id="mentor-submit">Refresh Mentor Availability</button>
+                <div class="tabling">
+                    <div class="schedule" id="schedule-id"></div>
+                    <div class="want-box" id="want-box-id"></div>
+                </div>
+            </div>
+            <div class="roadmap hidden">
+                <input id="roadmap-input" type="integer" placeholder="enter the roadmap ID">
+                <button class="submit" id="roadmap-submit">Show Roadmap</button>
+                <div class="map" id="roadmap-map"></div>
+            </div>
+            <div class="checkpoint hidden">
+                <input id="checkpoint-input" type="integer" placeholder="enter the checkpoint ID">
+                <button class="submit" id="checkpoint-submit">Show Checkpoint</button>
+                <div class="map" id="checkpoint-map"></div>
+            </div>
+        </div>
+    </body>
 
-  <script>
-    // You can also require other files to run in this process
-    require('./renderer.js')
-  </script>
+    <script>
+        // should i require all js files here, or in renderer.js?
+        require('./renderer.js')
+    </script>
 </html>

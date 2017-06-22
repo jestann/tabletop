@@ -1,7 +1,7 @@
 {
-  "name": "bloc-that",
+  "name": "Kele",
   "version": "1.0.0",
-  "description": "A minimal Electron app built for Bloc",
+  "description": "A minimal Electron app built on Node.js for Bloc",
   "main": "main.js",
   "scripts": {
     "start": "electron ."

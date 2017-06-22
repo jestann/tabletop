@@ -1,14 +1,38 @@
 body {
   font-family: roboto, sans-serif;
-  color: #333;
-  background: grey;
+  color: white;
+  background: white;
+}
+
+
+/* universal styling */
+
+.hidden {
+  display: none;
+}
+
+.error {
+  color: tomato;
+  background: lightsalmon;
+}
+
+.tabling {
+  display: table-cell;
+}
+
+input {
+  width: 30%;
+  padding: 0.66rem;
+  border-radius: 5px;
+  border-color: #fff;
+  color: gray;
 }
 
 .submit {
   padding: 0.666rem;
   border-radius: 5px;
-  background: #000;
-  color: #fff;
+  background: lime;
+  color: white;
   width: 10%;
   text-align: center;
   margin-top: 1rem;
@@ -17,23 +41,62 @@ body {
 
 .submit:hover {
   cursor: pointer;
-  background: grey;
-  color: white;
+  background: white;
+  color: tomato;
 }
 
-#mentor-submit {
+
+/* setting up basic layout */
+
+.heading {
+  background: lime;
+  border-radius: 5px;
+}
+
+.heading .welcome {
+  display: inline-block;
+  font-size: 2rem;
+  font-weight: bold;
+  position: relative;
+  left: 20px;
+}
+
+.heading .description {
+  display: inline-block;
+  position: relative;
+  font-style: italic;
+  right: 20px;
+}
+
+.login {
+  background: greenyellow;
+  border-radius: 5px;
+}
+
+.user {
+  background: teal;
+  border-radius: 5px;
+}
+
+.mentor {
+  background: lime;
+}
+
+.mentor .submit {
   width: 20%;
   font-size: 1rem;
-  border: none;
 }
 
-input {
-  width: 30%;
-  padding: 0.66rem;
-  font-size: 1.3rem;
-  border-radius: 5px;
-  border-color: #fff;
+.roadmap {
+  background: darkviolet;
 }
+
+.checkpoint {
+  background: dodgerblue;
+}
+
+
+/* mentor styling */
 
 .timebox {
   padding: 1rem;
@@ -54,7 +117,7 @@ input {
   color: white;
 }
 
-.selected {
+.timebox .selected {
   background: black;
   color: white;
 }
@@ -71,3 +134,4 @@ input {
   color: black;
   font-size: 1.5rem;
 }
+
