@@ -17,6 +17,9 @@ class Kele {
     this.authToken = null
     this.userObject = null
     this.mentorSchedule = null
+    this.initialize
+    this.getMe
+    this.getMentorAvailability
   }
   
   async initialize (email, password) {
@@ -83,14 +86,16 @@ class Kele {
     }
     catch(error) { console.log(error) }
   }
-}
 
-// module.exports = Kele
+  // module.exports = Kele
+}
 
 class KeleView {
   constructor() {
     // const Kele = require('Kele')
     this.kele = new Kele()
+    this.initializeView()
+    this.setupMentorView()
   }
   
   async initializeView () {
@@ -115,8 +120,9 @@ class KeleView {
       password = passwordBox.value
       
       // how to best handle this?
-      this.kele.authToken = await this.kele.initialize (email, password)
+      let authToken = await this.kele.initialize (email, password)
       console.log(`auth token retrieved: ${this.kele.authToken}`)
+      console.log(`auth token variable: ${authToken}`)
       
       this.kele.userObject = await this.kele.getMe(this.kele.authToken)
       console.log(this.kele.userObject)
@@ -137,11 +143,10 @@ class KeleView {
       }
     }
         
-    loginSubmit.addEventListener('click', this.loginListener)
+    loginSubmit.addEventListener('click', loginListener)
   }
   
   async setupMentorView () {
-  
     const mentorBox = document.getElementsByClassName('mentor')[0]
     const mentorSubmit = document.getElementById("mentor-submit")
     
@@ -196,20 +201,11 @@ class KeleView {
       })
     }
     
-    await this.refreshMentorView()
-    mentorSubmit.addEventListener('click', this.refreshMentorView)
-  }
-  
-  async initialize () {
-    await this.initializeView()
-    await this.refreshMentorView()
-    // this.refreshRoadmapView()
-    // this.refreshCheckpointView()
+    mentorSubmit.addEventListener('click', refreshMentorView)
   }
 }
 
 const keleView = new KeleView()
-keleView.initalize()
 
 
 

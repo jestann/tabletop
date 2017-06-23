@@ -28,9 +28,11 @@ input {
   width: 30%;
   padding: 0.66rem;
   border-radius: 5px;
+  border: none;
   box-shadow: none;
   color: gray;
-  margin-right: 10px;
+  margin-right: 20px;
+  margin-top: 10px;
 }
 
 .submit {
@@ -41,13 +43,13 @@ input {
   box-shadow: none;
   width: 10%;
   text-align: center;
-  margin: 1rem;
   border: none;
 }
 
 .submit:hover {
   cursor: pointer;
-  background: grey;
+  background: white;
+  color: black;
 }
 
 
@@ -56,6 +58,8 @@ input {
 .heading {
   background: #d44825;
   border-radius: 5px;
+  padding: 20px;
+  margin: 20px;
 }
 
 .heading .welcome {
@@ -68,17 +72,24 @@ input {
 
 .heading .description {
   display: inline-block;
-  position: relative;
+  position: absolute;
   font-style: italic;
-  right: 20px;
+  font-size: 1.5rem;
+  right: 60px;
 }
 
 .login {
   background: #6ab839;
   border-radius: 5px;
   margin: 20px;
-  padding: 20px;
+  padding: 40px;
+  padding-top: 10px;
+  padding-bottom: 30px;
   font-size: .75rem;
+}
+
+.login .submit {
+  margin-right: -10px;
 }
 
 .user {
