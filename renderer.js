@@ -4,8 +4,6 @@
 // All of the Node.js APIs are available in this process.
 
 
-// This is my working version of renderer.js
-
 // CLASS for API interaction
 
 class Kele {
@@ -415,9 +413,6 @@ class Kele {
     const checkpointSuccess = document.getElementById('checkpoint-success')
 
     async function sendCheckpoint {
-      // Not sure how javascript will handle these optional parameters
-      // Will it submit assignment branch and link regardless, but as ''?
-
       let submission = await kele.submitCheckpoint(
         checkpointNumberInput.value,
         assignmentBranchInput.value,
@@ -458,8 +453,6 @@ class Kele {
       threadsView.className = ''
       threadsView.innerHTML = ''
 
-      // Not sure how javascript will handle this optional parameter
-      // Will it submit threadsPage regardless, but as ''?
       const messagesObject = await kele.getMessages(threadsPage.value)
 
       if (messagesObject) {
@@ -514,8 +507,6 @@ class Kele {
     const messageSuccess = document.getElementById('message-success')
 
     async function sendMessage {
-      // Not sure how javascript will handle these optional parameters
-      // Will it submit thread and subject regardless, but as ''?
       let message = await kele.createMessage(
         threadInput.value,
         recipientInput.value,
@@ -524,31 +515,26 @@ class Kele {
       )
 
       if (message.success) {
+        threadInput.value = ''
+        recipientInput.value = ''
+        subjectInput.value = ''
+        bodyInput.value = ''
 
-        /*
-        checkpointNumberInput = ''
-        pointBox.innerHTML = ''
-
-        commentInput.value = ''
-        assignmentBranchInput.value = ''
-        assignmentLinkInput.value = ''
-
-        checkpointSuccess.innerHTML = `Checkpoint successfully submitted at ${submission.date}.`
+        messageSuccess.innerHTML = `Message successfully sent.`
       } else {
-        checkpointSuccess.innerHTML = 'Error submitting checkpoint. Please try again.'
+        messageSuccess.innerHTML = 'Error sending message. Please try again.'
       }
     }
 
-    checkpointSubmit.addEventListener('click', sendCheckpoint)
-    commentInput.addEventListener('keypress', function(event) {
+    messageSubmit.addEventListener('click', sendMessage)
+    bodyInput.addEventListener('keypress', function(event) {
       if (event.key === 'enter') {
-        sendCheckpoint()
+        sendMessage()
       }
     })
   }
-  */
 
-  }
+
   
   async function initialize () {
     await initializeView()
@@ -559,9 +545,8 @@ class Kele {
   }
 // }
 
+
+
 // const keleView = new KeleView()
 // keleView.initalize()
-
-
-// NOW call the summary method to initialize all view elements
 initialize()
