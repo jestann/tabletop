@@ -87,6 +87,9 @@ class Kele {
 
 // module.exports = Kele
 
+
+
+
 class KeleView {
   constructor() {
     // const Kele = require('Kele')
@@ -154,13 +157,13 @@ class KeleView {
       wantBox.innerHTML = ''
       
       schedule.forEach((availObject) => {
-        let timeBox = document.createElement('div')
+        const timeBox = document.createElement('div')
         timeBox.className = 'timebox t-hover tabling'
-        let start = document.createElement('p')
+        const start = document.createElement('p')
         start.innerHTML = `Starts At: ${availObject.starts_at}`
-        let end = document.createElement('p')
+        const end = document.createElement('p')
         end.innerHTML = `Ends At: ${availObject.ends_at}`
-        let claim = document.createElement('div')
+        const claim = document.createElement('div')
         claim.className = "timebox timebox-button"
         claim.innerHTML = "Claim this Spot!"
         timeBox.appendChild(start)
@@ -175,14 +178,14 @@ class KeleView {
           event.target.className = "timebox selected"
           event.target.innerHTML = "This spot claimed."
   
-          let savedBox = document.createElement('div')
+          const savedBox = document.createElement('div')
           savedBox.className = "timebox want-box tabling"
-          let claimedIt = document.createElement('div')
+          const claimedIt = document.createElement('div')
           claimedIt.innerHTML = "This Time Reserved:"
           claimedIt.className = "want-box-claim"
-          let startTime = document.createElement('p')
+          const startTime = document.createElement('p')
           startTime.innerHTML = `Starts At: ${availObject.starts_at}`
-          let endTime = document.createElement('p')
+          const endTime = document.createElement('p')
           endTime.innerHTML = `Ends At: ${availObject.ends_at}`
           savedBox.appendChild(claimedIt)
           savedBox.appendChild(startTime)
@@ -200,102 +203,51 @@ class KeleView {
     mentorSubmit.addEventListener('click', this.refreshMentorView)
   }
   
+  async setupRoadmapView () {
+    const roadmapBox = document.getElementsByClassName('roadmap')[0]
+    const roadmapInput = document.getElementById("roadmap-input")
+    const roadmapSubmit = document.getElementById('roadmap-submit')
+    const mapBox = document.getElementById("roadmap-map")
+    
+    async function refreshRoadmapView () {
+      
+      roadmapBox.innerHTML = ''
+      const map = await this.kele.getRoadmap(roadmapInput.value)
+
+      // parse the json here?
+      map.forEach((element) => {
+        const elementBox = document.createElement('div')
+        elementBox.className = 'timebox tabling'
+        
+        for property in element {
+          const propBox = document.createElement('div')
+          propBox.className = 'timebox tabling'
+          propBox.innerHTML = `${property}: ${element[property]}`
+          elementBox.appendChild(propBox)
+        }
+        
+        mapBox.appendChild(elementBox)
+      })
+    }
+    
+    roadmapSubmit.addEventListener('click', this.refreshRoadmapView)
+  }
+  
+  
   async initialize () {
     await this.initializeView()
-    await this.refreshMentorView()
-    // this.refreshRoadmapView()
-    // this.refreshCheckpointView()
+    await this.setupMentorView()
+    await this.setupRoadmapView()
+    // this.setupRoadmapView()
   }
 }
+
+// module.exports = KeleView
+
+
+
+
+// setup actual view elements
 
 const keleView = new KeleView()
 keleView.initalize()
-
-
-
-
-/*
-TESTING FINISHED ELEMENTS
-
-// View functionality for roadmaps
-
-let roadmapBox = document.getElementById("roadmap");
-roadmapBox.innerHTML = "No roadmap information available.";
-let roadmapSubmit = document.getElementById("roadmap-submit");
-
-function updateRoadmap () {
-  
-  // FOR TESTING:
-  // let authToken = "jjj";
-  // let userObject = {};
-  
-  if (authToken && userObject) {
-    roadmapBox.innerHTML = "";
-    let roadmap = getRoadmap (roadmapId);
-    
-    // FOR TESTING:
-    /*
-    let roadmap = [
-      { starts_at: 1, ends_at: 2 },
-      { starts_at: 2, ends_at: 3 },
-      { starts_at: 3, ends_at: 4 }
-    ];
-    
-    
-    roadmap.forEach((availObject) => {
-      let timeBox = document.createElement('div');
-      timeBox.className = "timebox t-hover";
-      let start = document.createElement('p');
-      start.innerHTML = `Starts At: ${availObject.starts_at}`;
-      let end = document.createElement('p');
-      end.innerHTML = `Ends At: ${availObject.ends_at}`;
-      let claim = document.createElement('div');
-      claim.className = "timebox timebox-button";
-      claim.innerHTML = "Claim this Spot!";
-      timeBox.appendChild(start);
-      timeBox.appendChild(end);
-      timeBox.appendChild(claim);
-      
-      claim.addEventListener("click", function(event) {
-        scheduleBox.childNodes.forEach((timeBox) => { 
-          timeBox.childNodes[2].className = 'timebox timebox-button';
-          timeBox.childNodes[2].innerHTML = "Claim this Spot!";
-        });
-        event.target.className = "timebox selected";
-        event.target.innerHTML = "This spot claimed.";
-
-        let savedBox = document.createElement('div');
-        savedBox.className = "timebox want-box";
-        let claimedIt = document.createElement('div');
-        claimedIt.innerHTML = "This Time Reserved:";
-        claimedIt.className = "want-box-claim";
-        let startTime = document.createElement('p');
-        startTime.innerHTML = `Starts At: ${availObject.starts_at}`;
-        let endTime = document.createElement('p');
-        endTime.innerHTML = `Ends At: ${availObject.ends_at}`;
-        savedBox.appendChild(claimedIt);
-        savedBox.appendChild(startTime);
-        savedBox.appendChild(endTime);
-
-        wantBox.innerHTML = "";
-        wantBox.appendChild(savedBox);
-      });
-
-      scheduleBox.appendChild(timeBox);
-    });
-  } else {
-    scheduleBox.innerHTML = "No user information available."
-  }
-}
-
-updateMentorSchedule();
-mentorSubmit.addEventListener('click', updateMentorSchedule);
-
-
-// View functionality for checkpoints
-
-let checkpointBox = document.getElementById("checkpoint");
-checkpointBox.innerHTML = "No checkpoint information available.";
-let checkpointSubmit = document.getElementById("checkpoint-submit");
-
-*/
