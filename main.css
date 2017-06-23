@@ -4,9 +4,11 @@ body {
   background: white;
 }
 
-body:child {
-  padding: 20px;
+.main > div {
+  padding: 40px;
+  padding-top: 20px;
   margin: 20px;
+  border-radius: 5px;
 }
 
 /* universal styling */
@@ -18,19 +20,28 @@ body:child {
 .error {
   color: tomato;
   background: lightsalmon;
+  font-weight: bold;
+  font-size: 1.25rem;
 }
 
 .tabling {
-  display: table-cell;
+  display: inline-block;
+}
+
+.tabling:nth-child(4n-1) {
+  display: block;
+  margin: 10px;
 }
 
 input {
   width: 30%;
   padding: 0.66rem;
   border-radius: 5px;
+  border: none;
   box-shadow: none;
   color: gray;
-  margin-right: 10px;
+  margin-right: 20px;
+  margin-top: 10px;
 }
 
 .submit {
@@ -39,15 +50,16 @@ input {
   background: black;
   color: white;
   box-shadow: none;
-  width: 10%;
+  width: 200px;
   text-align: center;
-  margin: 1rem;
   border: none;
+  text-decoration: none;
+  cursor: pointer;
 }
 
 .submit:hover {
   cursor: pointer;
-  background: grey;
+  background: #333;
 }
 
 
@@ -56,6 +68,8 @@ input {
 .heading {
   background: #d44825;
   border-radius: 5px;
+  padding: 20px;
+  margin: 20px;
 }
 
 .heading .welcome {
@@ -68,31 +82,43 @@ input {
 
 .heading .description {
   display: inline-block;
-  position: relative;
+  position: absolute;
   font-style: italic;
-  right: 20px;
+  font-size: 1.5rem;
+  right: 60px;
 }
 
 .login {
   background: #6ab839;
   border-radius: 5px;
   margin: 20px;
-  padding: 20px;
+  padding: 40px;
+  padding-top: 0px;
+  padding-bottom: 40px;
   font-size: .75rem;
+}
+
+.login .submit {
+  width: 100px;
+  margin-right: -10px;
 }
 
 .user {
   background: #6ab839;
   border-radius: 5px;
+  padding-top: 10px;
+}
+
+.user h2 {
+  margin-bottom: 0px;
 }
 
 .mentor {
   background: #02a17d;
 }
 
-.mentor .submit {
-  width: 20%;
-  font-size: 1rem;
+.mentor .schedule {
+  margin-top: 30px;
 }
 
 .roadmap {
@@ -100,22 +126,29 @@ input {
 }
 
 .checkpoint {
-  background: #1f55e;
+  background: #1f155e;
+}
+
+.checkpoint .point-box {
+  margin-top: 20px;
+}
+
+.messages {
+  background: black;
 }
 
 
-/* mentor styling */
+/* mentor schedule styling */
 
 .timebox {
-  padding: 1rem;
-  margin: 1rem;
+  padding: 10px;
+  margin: 10px;
   border-radius: 5px;
   background: white;
   color: grey;
 }
 
 .t-hover:hover {
-  cursor: pointer;
   background: black;
   color: white;
 }
@@ -123,6 +156,7 @@ input {
 .timebox-button {
   background: tomato;
   color: white;
+  cursor: pointer;
 }
 
 .timebox .selected {
@@ -130,16 +164,10 @@ input {
   color: white;
 }
 
-.want-box {
-  background: white;
-  color: grey;
-  border-radius: 5px;
-  width: 20%;
+#want-box {
+  width: 200px;
+  padding: 30px;
+  padding-top: 20px;
+  background: black;
+  color: white;
 }
-
-.want-box-claim {
-  font-weight: bold;
-  color: black;
-  font-size: 1.5rem;
-}
-

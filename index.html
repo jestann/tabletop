@@ -3,40 +3,42 @@
     <head>
         <meta charset="UTF-8">
         <title>Bloc That</title>
-        <link rel="stylesheet" type="text/css" href="main.css">
+        <link rel="stylesheet" type="text/css" href="main.css">i
     </head>
     <body>
         <div class="heading">
-            <div class="welcome">Welcome to Kele!</div>
-            <div class="description">a Bloc Desktop app!</div>
+            <div class="welcome">Kele</div>
+            <div class="description">a Bloc Desktop app</div>
         </div>
         <div class="main">
             <div class="login">
-                <h1>Log in to Bloc</h1>
+                <h1>... log in to Bloc</h1>
                 <input id="input-email" type="text" placeholder="enter your email">
                 <input id="input-password" type="password" placeholder="enter your password">
                 <button class="submit" id="login-submit">Log In</button>
             </div>
-            <div class="user hidden">
-                <div id="user-info"></div>
-            </div>
-            <div class="mentor hidden">
-                <h1>Mentor Availability</h1>
+            <div class="user hidden" id="user"></div>
+            <div class="mentor hidden" id="mentor">
+                <h2>Mentor Availability</h2>
                 <button class="submit" id="mentor-submit">Refresh Mentor Availability</button>
-                <div class="tabling">
-                    <div class="schedule" id="schedule-id"></div>
-                    <div class="want-box" id="want-box-id"></div>
+                <div class="schedule" id="schedule"></div>
+                <div class="timebox hidden" id="want-box"></div>
                 </div>
             </div>
-            <div class="roadmap hidden">
+            <div class="roadmap hidden" id="roadmap">
+                <h2>Roadmaps</h2>
                 <input id="roadmap-input" type="integer" placeholder="enter the roadmap ID">
                 <button class="submit" id="roadmap-submit">Show Roadmap</button>
                 <div class="map" id="roadmap-map"></div>
             </div>
-            <div class="checkpoint hidden">
+            <div class="checkpoint hidden" id="checkpoint">
+                <h2>Checkpoints</h2>
                 <input id="checkpoint-input" type="integer" placeholder="enter the checkpoint ID">
                 <button class="submit" id="checkpoint-submit">Show Checkpoint</button>
                 <div class="map" id="checkpoint-map"></div>
+            </div>
+            <div class="messages hidden" id="messages">
+                <h2>Messages</h2>
             </div>
         </div>
     </body>
