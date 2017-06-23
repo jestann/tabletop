@@ -16,6 +16,7 @@ class Kele {
     this.mentorSchedule = null
     this.roadmap = null
     this.checkpoint = null
+    this.messages = null
   }
   
   async initialize (email, password) {
@@ -27,6 +28,7 @@ class Kele {
       })
       let data = await response.json()
       this.authToken = data.auth_token
+      // console.log(this.authToken)
       return this.authToken
     } 
     catch(error) { console.log(error) }
@@ -36,11 +38,10 @@ class Kele {
     try {
       let response = await fetch(`${this.baseUrl}/users/me`, {
         method: 'GET',
-        headers: {'Content-Type': 'application/json', 'authorization': this.authToken},
+        headers: {'Content-Type': 'application/json', 'authorization': this.authToken}
       })
-      console.log(response)
       this.userObject = await response.json()
-      console.log(this.userObject)
+      // console.log(this.userObject)
       return this.userObject
     }
     catch(error) { console.log(error) }
@@ -50,10 +51,10 @@ class Kele {
     try {
       let response = await fetch(`${this.baseUrl}/mentors/${mentorId}/student_availability`, {
         method: 'GET',
-        headers: {'Content-Type': 'application/json', 'authorization': this.authToken},
+        headers: {'Content-Type': 'application/json', 'authorization': this.authToken}
       })
       this.mentorSchedule = await response.json()
-      console.log(this.mentorSchedule)
+      // console.log(this.mentorSchedule)
       return this.mentorSchedule
     }
     catch(error) { console.log(error) }
@@ -63,10 +64,10 @@ class Kele {
     try {
       let response = await fetch(`${this.baseUrl}/roadmaps/${roadmapId}`, {
         method: 'GET',
-        headers: {'Content-Type': 'application/json', 'authorization': this.authToken},
+        headers: {'Content-Type': 'application/json', 'authorization': this.authToken}
       })
       this.roadmap = await response.json()
-      console.log(this.roadmap)
+      // console.log(this.roadmap)
       return this.roadmap
     }
     catch(error) { console.log(error) }
@@ -76,11 +77,100 @@ class Kele {
     try {
       let response = await fetch(`${this.baseUrl}/checkpoints/${checkpointId}`, {
         method: 'GET',
-        headers: {'Content-Type': 'application/json', 'authorization': this.authToken},
+        headers: {'Content-Type': 'application/json', 'authorization': this.authToken}
       })
       this.checkpoint = await response.json()
-      console.log(this.checkpoint)
+      // console.log(this.checkpoint)
       return this.checkpoint
+    }
+    catch(error) { console.log(error) }
+  }
+
+  async getMessages (page=null) {
+    try {
+      // OPTIONAL page parameter or return all threads
+      let response = null
+      if (page) {
+        response = await fetch(`${this.baseUrl}/message_threads`, {
+          method: 'GET',
+          headers: {'Content-Type': 'application/json', 'authorization': this.authToken},
+          body: `{"page": ${page}}`
+        })
+      } else {
+        response = await fetch(`${this.baseUrl}/message_thrads`, {
+          method: 'GET',
+          headers: {'Content-Type': 'application/json', 'authorization': this.authToken}
+        })
+      }
+      this.messages = await response.json()
+      console.log(this.messages)
+      return this.messages
+    }
+    catch(error) { console.log(error) }
+  }
+
+  async createMessage (threadToken=null, recipientId, subject="", body) {
+    try {
+      // OPTIONAL threadToken or create new thread with subject
+      let response = null
+      if (threadToken) { 
+        response = await fetch(`${this.baseUrl}/messages`, {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json', 'authorization': this.authToken},
+          body: `{ 
+            "sender": "${this.userObject.email}",
+            "recipient_id": ${recipientId},
+            "token": "${threadToken}",
+            "stripped-text": "${body}"
+          }`
+        })
+      } else {
+        response = await fetch(`${this.baseUrl}/messages`, {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json', 'authorization': this.authToken},
+          body: `{ 
+            "sender": "${this.userObject.email}",
+            "recipient_id": ${recipientId},
+            "subject": "${subject}",
+            "stripped-text": "${body}"
+          }`
+        })
+      }
+      return await response
+    }
+    catch(error) { console.log(error) }
+  }
+
+  async submitCheckpoint (checkpointId, assignmentBranch=null, assignmentLink=null, comment) {
+    try {
+      let response = null
+      // OPTIONAL assignment branch and link
+      if (assignmentBranch && assignmentLink) {
+        let response = await fetch(`${this.baseUrl}/checkpoint_submissions`, {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json', 'authorization': this.authToken},
+          body: `{ 
+            "assignment_branch": "${assignmentBranch}",
+            "assignment_commit_link": ${assignmentLink},
+            "checkpoint_id": "${checkpointId}",
+            "comment": "${comment}",
+            "enrollment_id": "${this.userObject.enrollment_id}"
+          }`
+        })
+      } else {
+        let response = await fetch(`${this.baseUrl}/checkpoint_submissions`, {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json', 'authorization': this.authToken},
+          body: `{ 
+            "checkpoint_id": "${checkpointId}",
+            "comment": "${comment}",
+            "enrollment_id": "${this.userObject.enrollment_id}"
+          }`
+        })
+      }
+      let data = await response.json()
+      console.log(data)
+      return { success: true, time: data.updated_at }
     }
     catch(error) { console.log(error) }
   }
@@ -98,11 +188,10 @@ class Kele {
 //  }
 
 
-// Create an instance of the Kele class
-const kele = new Kele()
+  // Create an instance of the Kele class
+  const kele = new Kele()
   
 
-// Separately create all view functionality in methods
   async function initializeView () {
     let email = ''
     let password = ''
@@ -122,12 +211,11 @@ const kele = new Kele()
       email = emailBox.value
       password = passwordBox.value
       
-      // how to best handle this?
       await kele.initialize (email, password)
-      console.log(`auth token retrieved: ${kele.authToken}`)
+      // console.log(`auth token retrieved: ${kele.authToken}`)
       
       await kele.getMe()
-      console.log(kele.userObject)
+      // console.log(kele.userObject)
 
       if (kele.userObject) {
         loginBox.className = 'login hidden'
@@ -147,17 +235,15 @@ const kele = new Kele()
     }
         
     loginSubmit.addEventListener('click', loginListener)
-
-    /*
-    // Not yet working
-    loginSubmit.addEventListener('keypress', function(event) {
+    passwordBox.addEventListener('keypress', function(event) {
         console.log(event)
         if (event.key === 'enter') {
           loginListener()
         }
     })
-    */
   }
+
+
   
   async function setupMentorView () {
   
@@ -232,22 +318,21 @@ const kele = new Kele()
             wantBox.appendChild(startTime)
             wantBox.appendChild(endTime)
           }
-
           claim.addEventListener("click", claimListener)
           
           if (timeIndex % 3 === 0){
             const magicDiv = document.createElement('div')
-            magicDiv.innerHTML = '     '
+            magicDiv.innerHTML = ' '
             scheduleBox.appendChild(magicDiv)
           }
           scheduleBox.appendChild(timeBox)
-
         })
       }
     }
-    
     mentorSubmit.addEventListener('click', refreshMentorView)
   }
+
+
   
   async function setupRoadmapView () {
     const roadmapBox = document.getElementById('roadmap')
@@ -256,7 +341,6 @@ const kele = new Kele()
     const mapBox = document.getElementById("roadmap-map")
     
     async function refreshRoadmapView () {
-      
       mapBox.innerHTML = ''
       const map = await kele.getRoadmap(roadmapInput.value)
 
@@ -286,30 +370,25 @@ const kele = new Kele()
     }
     
     roadmapSubmit.addEventListener('click', refreshRoadmapView)
-
-    /*
-    // Not yet working
-    roadmapSubmit.addEventListener('keypress', function(event) {
+    roadmapInput.addEventListener('keypress', function(event) {
         console.log(event)
         if (event.key === 'enter') {
           refreshRoadmapView()
         }
     })
-    */
   }
+
+
   
   async function setupCheckpointView () {
-    const checkpointBox = document.getElementById('checkpoint')
-    const checkpointInput = document.getElementById("checkpoint-input")
-    const checkpointSubmit = document.getElementById('checkpoint-submit')
+    const checkpointNumberInput = document.getElementById("checkpoint-number")
+    const checkpointGet = document.getElementById('checkpoint-get')
     const pointBox = document.getElementById("checkpoint-map")
-    pointBox.className = 'point-box'
     
     async function refreshCheckpointView () {
-      
       pointBox.innerHTML = ''
-      const point = await kele.getCheckpoint(checkpointInput.value)
 
+      const point = await kele.getCheckpoint(checkpointNumberInput.value)
       // ERROR: "Sorry, you are not authorized to do that."
       if (point.name) {
         const pointName = document.createElement('h3')
@@ -319,18 +398,156 @@ const kele = new Kele()
         pointBox.innerHTML = "Sorry, Bloc doesn't authorize anyone to do this for some reason."
       }
     }
-    
-    checkpointSubmit.addEventListener('click', refreshCheckpointView)
 
-    /*
-    // Not yet working
-    checkpointSubmit.addEventListener('keypress', function(event) {
+    checkpointGet.addEventListener('click', refreshCheckpointView)
+    checkpointNumberInput.addEventListener('keypress', function(event) {
         console.log(event)
         if (event.key === 'enter') {
           refreshCheckpointView()
         }
     })
-    */
+
+    const checkpointBox = document.getElementById('checkpoint-submission')
+    const assignmentBranchInput = document.getElementById('assignment-branch')
+    const assignmentLinkInput = document.getElementById('assignment-link')
+    const commentInput = document.getElementById('checkpoint-comment')
+    const checkpointSubmit = document.getElementById('checkpoint-submit')
+    const checkpointSuccess = document.getElementById('checkpoint-success')
+
+    async function sendCheckpoint {
+      // Not sure how javascript will handle these optional parameters
+      // Will it submit assignment branch and link regardless, but as ''?
+
+      let submission = await kele.submitCheckpoint(
+        checkpointNumberInput.value,
+        assignmentBranchInput.value,
+        assignmentLinkInput.value,
+        commentInput.value
+      )
+
+      if (submission.success) {
+        checkpointNumberInput = ''
+        pointBox.innerHTML = ''
+
+        commentInput.value = ''
+        assignmentBranchInput.value = ''
+        assignmentLinkInput.value = ''
+
+        checkpointSuccess.innerHTML = `Checkpoint successfully submitted at ${submission.date}.`
+      } else {
+        checkpointSuccess.innerHTML = 'Error submitting checkpoint. Please try again.'
+      }
+    }
+
+    checkpointSubmit.addEventListener('click', sendCheckpoint)
+    commentInput.addEventListener('keypress', function(event) {
+      if (event.key === 'enter') {
+        sendCheckpoint()
+      }
+    })
+  }
+
+
+
+  async function setupMessagesView {
+    const messagesGet = document.getElementById('messages-get')
+    const threadsPage = document.getElementById('messages-page')
+    const threadsView = document.getElementById('message-threads-view')
+
+    async function refreshMessages {
+      threadsView.className = ''
+      threadsView.innerHTML = ''
+
+      // Not sure how javascript will handle this optional parameter
+      // Will it submit threadsPage regardless, but as ''?
+      const messagesObject = await kele.getMessages(threadsPage.value)
+
+      if (messagesObject) {
+        const countBox = document.createElement('p')
+        countBox.innerHTML = `Number of Threads: ${messagesObject.count}`
+
+        const threadsList = document.createElement('ul')
+        messagesObject.items.forEach( (threadObject) => {
+          const threadBox = document.createElement('li')
+
+          const threadId = document.createElement('p')
+          threadId.innerHTML = `Thread Id: ${threadObject.id}`
+          const threadSubject = document.createElement('p')
+          threadSubject.innerHTML = `Subject: ${threadObject.subject}`
+          const threadCount = document.createElement('p')
+          threadCount.innerHTML = `${threadObject.messages_count} messages in thread.`
+          const threadDate = document.createElement('p')
+          threadDate.innerHTML = `Last Message at ${threadObject.updated_at} by ${threadObject.first_name} ${threadOject.last_name}`
+          const threadPreview = document.createElement('p')
+          threadPreview.innerHTML = `${threadObject.preview}`
+
+          threadBox.appendChild(threadId)
+          threadBox.appendChild(threadSubject)
+          threadBox.appendChild(threadCount)
+          threadBox.appendChild(threadDate)
+          threadBox.appendChlid(threadPreview)
+
+          threadsList.appendChild(threadBox)
+        })
+
+        threadsView.appendChild(countBox)
+        threadsView.appendChild(threadsList)
+      } else {
+        threadsView.innerHTML = "Error retrieving messages."
+      }
+    }
+
+    messagesGet.addEventListener('click', refreshMessages)
+    messagesPage.addEventListener('keypress', function(event) {
+        console.log(event)
+        if (event.key === 'enter') {
+          refreshMessages()
+        }
+    })
+
+    const messageSubmissionBox = document.getElementById('message-submission')
+    const threadInput = document.getElementById('message-thread')
+    const recipientInput = document.getElementById('message-recipient')
+    const subjectInput = document.getElementById('message-subject')
+    const bodyInput = document.getElementById('message-body')
+    const messageSubmit = document.getElementById('message-submit')
+    const messageSuccess = document.getElementById('message-success')
+
+    async function sendMessage {
+      // Not sure how javascript will handle these optional parameters
+      // Will it submit thread and subject regardless, but as ''?
+      let message = await kele.createMessage(
+        threadInput.value,
+        recipientInput.value,
+        subjectInput.value,
+        bodyInput.value
+      )
+
+      if (message.success) {
+
+        /*
+        checkpointNumberInput = ''
+        pointBox.innerHTML = ''
+
+        commentInput.value = ''
+        assignmentBranchInput.value = ''
+        assignmentLinkInput.value = ''
+
+        checkpointSuccess.innerHTML = `Checkpoint successfully submitted at ${submission.date}.`
+      } else {
+        checkpointSuccess.innerHTML = 'Error submitting checkpoint. Please try again.'
+      }
+    }
+
+    checkpointSubmit.addEventListener('click', sendCheckpoint)
+    commentInput.addEventListener('keypress', function(event) {
+      if (event.key === 'enter') {
+        sendCheckpoint()
+      }
+    })
+  }
+  */
+
   }
   
   async function initialize () {
@@ -338,6 +555,7 @@ const kele = new Kele()
     await setupMentorView()
     await setupRoadmapView()
     await setupCheckpointView()
+    await setupMessagesView()
   }
 // }
 

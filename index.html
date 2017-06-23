@@ -32,12 +32,32 @@
             </div>
             <div class="checkpoint hidden" id="checkpoint">
                 <h2>Checkpoints</h2>
-                <input id="checkpoint-input" type="integer" placeholder="enter the checkpoint ID">
-                <button class="submit" id="checkpoint-submit">Show Checkpoint</button>
-                <div class="map" id="checkpoint-map"></div>
+                <input id="checkpoint-id-input" type="integer" placeholder="enter the checkpoint ID">
+                <button class="submit" id="checkpoint-get">Show Checkpoint</button>
+                <div class="map point-box" id="checkpoint-map"></div>
+                <div class="submission hidden" id="checkpoint-submission">
+                    <h3>Submit this Checkpoint...</h3>
+                    <input id="assignment-branch">
+                    <input id="assignment-link">
+                    <input id="checkpoint-comment">
+                    <button class="submit" id="checkpoint-submit">Submit Checkpoint></button>
+                    <div id="checkpoint-success"></div>
+                </div>
             </div>
             <div class="messages hidden" id="messages">
                 <h2>Messages</h2>
+                <input id="messages-page" type="text" placeholder="want to see a specific page?">
+                <button class="submit" id="messages-get">Show Current Messages</button>
+                <div class="hidden" id="message-threads-view"></div>
+                <div class="submission" id="message-submission">
+                    <h3>Write a new Message...</h3>
+                    <input id="message-thread">
+                    <input id="message-recipient">
+                    <input id="message-subject">
+                    <input id="message-body">
+                    <button class="submit" id="message-submit">
+                    <div id="message-success"></div>
+                </div>
             </div>
         </div>
     </body>
