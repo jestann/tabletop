@@ -147,12 +147,16 @@ const kele = new Kele()
     }
         
     loginSubmit.addEventListener('click', loginListener)
+
+    /*
+    // Not yet working
     loginSubmit.addEventListener('keypress', function(event) {
         console.log(event)
         if (event.key === 'enter') {
           loginListener()
         }
     })
+    */
   }
   
   async function setupMentorView () {
@@ -282,12 +286,16 @@ const kele = new Kele()
     }
     
     roadmapSubmit.addEventListener('click', refreshRoadmapView)
+
+    /*
+    // Not yet working
     roadmapSubmit.addEventListener('keypress', function(event) {
         console.log(event)
         if (event.key === 'enter') {
           refreshRoadmapView()
         }
     })
+    */
   }
   
   async function setupCheckpointView () {
@@ -313,12 +321,16 @@ const kele = new Kele()
     }
     
     checkpointSubmit.addEventListener('click', refreshCheckpointView)
+
+    /*
+    // Not yet working
     checkpointSubmit.addEventListener('keypress', function(event) {
         console.log(event)
         if (event.key === 'enter') {
           refreshCheckpointView()
         }
     })
+    */
   }
   
   async function initialize () {
@@ -333,5 +345,5 @@ const kele = new Kele()
 // keleView.initalize()
 
 
-// Call the summary method to initialize all view elements
+// NOW call the summary method to initialize all view elements
 initialize()
