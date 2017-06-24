@@ -1,3 +1,5 @@
+/*
+
 // This class manages view functionality for the methods in this.kele.js
 
 class KeleView {

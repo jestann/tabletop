@@ -1,6 +1,7 @@
 // This version uses an internally defined Kele class.
-// It defines view functionality in the global space.
-// It's fully functional, or as much as possible with current API interaction errors.
+// It has full view functionality.
+// All the view works, but it has some API interaction errors.
+// Some of them seem to have to do with permissions in the Bloc API...?
 
 
 

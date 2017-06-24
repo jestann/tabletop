@@ -1,3 +1,5 @@
+/*
+
 // This class manages 'GET' and 'POST' interaction with the Bloc API.
 
 class Kele {
