@@ -26,21 +26,21 @@
             </div>
             <div class="roadmap hidden" id="roadmap">
                 <h2>Roadmaps</h2>
-                <input id="roadmap-input" type="integer" placeholder="enter the roadmap ID">
+                <input id="roadmap-input" type="number" placeholder="enter the roadmap ID">
                 <button class="submit" id="roadmap-submit">Show Roadmap</button>
                 <div class="map" id="roadmap-map"></div>
             </div>
             <div class="checkpoint hidden" id="checkpoint">
                 <h2>Checkpoints</h2>
-                <input id="checkpoint-id-input" type="integer" placeholder="enter the checkpoint ID">
+                <input id="checkpoint-id-input" type="number" placeholder="enter the checkpoint ID">
                 <button class="submit" id="checkpoint-get">Show Checkpoint</button>
                 <div class="map point-box" id="checkpoint-map"></div>
                 <div class="submission hidden" id="checkpoint-submission">
                     <h3>Submit this Checkpoint...</h3>
-                    <input id="assignment-branch">
-                    <input id="assignment-link">
-                    <input id="checkpoint-comment">
-                    <button class="submit" id="checkpoint-submit">Submit Checkpoint></button>
+                    <input id="assignment-branch" type="text" placeholder="type the name of the assignment branch on GitHub or leave blank">
+                    <input id="assignment-link" type="text" placeholder="type the link to the assignment branch on GitHub or leave blank">
+                    <textarea id="checkpoint-comment" placeholder="enter any comments about the checkpoint here">
+                    <button class="submit" id="checkpoint-submit">Submit Checkpoint</button>
                     <div id="checkpoint-success"></div>
                 </div>
             </div>
@@ -51,11 +51,11 @@
                 <div class="hidden" id="message-threads-view"></div>
                 <div class="submission" id="message-submission">
                     <h3>Write a new Message...</h3>
-                    <input id="message-thread">
-                    <input id="message-recipient">
-                    <input id="message-subject">
-                    <input id="message-body">
-                    <button class="submit" id="message-submit">
+                    <input id="message-thread" type="text" placeholder="enter the token for a specific thread or leave blank to create a new thread">
+                    <input id="message-recipient" type="number" placeholder="enter the numeric ID of the message recipient">
+                    <input id="message-subject" type="text" placeholder="type a message subject or leave blank if adding to an existing thread">
+                    <textarea id="message-body" placeholder="type your message here...">
+                    <button class="submit" id="message-submit">Send Message</button>
                     <div id="message-success"></div>
                 </div>
             </div>
@@ -65,5 +65,7 @@
     <script>
         // should i require all js files here, or in renderer.js?
         require('./renderer.js')
+        require('./Kele.js')
+        require('./KeleView.js')
     </script>
 </html>

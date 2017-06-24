@@ -13,6 +13,10 @@ body {
 
 /* universal styling */
 
+.submission {
+  margin-top: 20px;
+}
+
 .hidden {
   display: none;
 }
@@ -44,6 +48,25 @@ input {
   margin-top: 10px;
 }
 
+.submission input {
+  display: block;
+  width: 60%;
+  padding: 1rem;
+  margin-bottom: 10px;
+}
+
+textarea {
+  height: 100px;
+  width: 60%;
+  border-radius: 5px;
+  border: none;
+  box-shadow: none;
+  padding: 1rem;
+  margin-bottom: 10px;
+  text-align: top;
+  color: grey;
+}
+
 .submit {
   padding: 0.666rem;
   border-radius: 5px;
@@ -55,6 +78,7 @@ input {
   border: none;
   text-decoration: none;
   cursor: pointer;
+  margin-top: 10px;
 }
 
 .submit:hover {
@@ -135,6 +159,14 @@ input {
 
 .messages {
   background: black;
+}
+
+.messages .submit {
+  background: #444;
+}
+
+.messages .submit:hover {
+  background: #aaa;
 }
 
 
