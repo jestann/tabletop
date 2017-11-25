@@ -1,6 +1,8 @@
-# Tabletop: a Bloc Desktop App
+### tabletop
 
-_Built on [Node.js](https://nodejs.org), [Electron](https://electron.atom.io), and [Chromium](https://www.chromium.org)._
+_Desktop app built to access the Bloc Educational API._
+
+Built on [Node.js](https://nodejs.org), [Electron](https://electron.atom.io), and [Chromium](https://www.chromium.org).
 
 This desktop app offers easy functionality with rainbow-colored good vibes.
 
