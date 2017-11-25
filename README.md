@@ -1,4 +1,4 @@
-# Kele: a Bloc Desktop App
+# Tabletop: a Bloc Desktop App
 
 _Built on [Node.js](https://nodejs.org), [Electron](https://electron.atom.io), and [Chromium](https://www.chromium.org)._
 
