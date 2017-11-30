@@ -1,18 +1,13 @@
 {
-  "name": "Kele",
+  "name": "tabletop",
   "version": "1.0.0",
-  "description": "A minimal Electron app built on Node.js for Bloc",
+  "description": "A minimal desktop app built on Electron, vanilla Javascript, and Node.js for the Bloc Educational API",
   "main": "main.js",
   "scripts": {
     "start": "electron ."
   },
   "repository": "https://github.com/jestann/node-api.git",
-  "keywords": [
-    "Bloc",
-    "Node.js",
-    "API"
-  ],
-  "author": "Jess Bird",
+  "author": "jestann",
   "license": "MIT",
   "devDependencies": {
     "electron": "~1.6.2"
