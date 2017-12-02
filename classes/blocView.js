@@ -1,13 +1,10 @@
-/*
+// This class manages view functionality for the Bloc API calls.
 
-// This class manages view functionality for the methods in this.kele.js
-
-class KeleView {
+class BlocView {
   constructor() {
-    const Kele = require('./Kele.js')
-    console.log(Kele)
-    this.kele = new Kele()
-  }  
+    const Bloc = require('./classes/bloc')
+    this.bloc = new Bloc()
+  }
 
   async initializeView () {
     let email = ''
@@ -28,17 +25,17 @@ class KeleView {
       email = emailBox.value
       password = passwordBox.value
       
-      await this.kele.initialize (email, password)
+      await this.bloc.initialize (email, password)
       // console.log(`auth token retrieved: ${this.kele.authToken}`)
       
-      await this.kele.getMe()
+      await this.bloc.getMe()
       // console.log(this.kele.userObject)
 
-      if (this.kele.userObject) {
+      if (this.bloc.userObject) {
         loginBox.className = 'login hidden'
         
         userBox.className = 'user'
-        userBox.innerHTML = `<h2>Welcome to Bloc, ${this.kele.userObject.name}!</h2>`
+        userBox.innerHTML = `<h2>Welcome to Bloc, ${this.bloc.userObject.name}!</h2>`
         
         mentorBox.className = 'mentor'
         roadmapBox.className = 'roadmap'
@@ -59,7 +56,6 @@ class KeleView {
     })
   }
 
-
   async setupMentorView () {
   
     const mentorBox = document.getElementById('mentor')
@@ -72,7 +68,7 @@ class KeleView {
       scheduleBox.innerHTML = ''
       wantBox.innerHTML = ''
 
-      const schedule = await this.kele.getMentorAvailability(this.kele.userObject.current_enrollment.mentor_id)
+      const schedule = await this.bloc.getMentorAvailability(this.bloc.userObject.current_enrollment.mentor_id)
       let timeIndex = 0
       
       if (schedule) {
@@ -147,7 +143,6 @@ class KeleView {
     mentorSubmit.addEventListener('click', refreshMentorView)
   }
 
-  
   async setupRoadmapView () {
     const roadmapBox = document.getElementById('roadmap')
     const roadmapInput = document.getElementById("roadmap-input")
@@ -156,7 +151,7 @@ class KeleView {
     
     async function refreshRoadmapView () {
       mapBox.innerHTML = ''
-      const map = await this.kele.getRoadmap(roadmapInput.value)
+      const map = await this.bloc.getRoadmap(roadmapInput.value)
 
       if (map) {
         const mapName = document.createElement('h3')
@@ -190,7 +185,6 @@ class KeleView {
         }
     })
   }
-
   
   async setupCheckpointView () {
     const checkpointIdInput = document.getElementById("checkpoint-id-input")
@@ -201,7 +195,7 @@ class KeleView {
     async function refreshCheckpointView () {
       pointBox.innerHTML = ''
 
-      const point = await this.kele.getCheckpoint(checkpointIdInput.value)
+      const point = await this.bloc.getCheckpoint(checkpointIdInput.value)
       // ERROR: "Sorry, you are not authorized to do that."
       if (point.name) {
         const pointName = document.createElement('h3')
@@ -228,7 +222,7 @@ class KeleView {
     const checkpointSuccess = document.getElementById('checkpoint-success')
 
     async function sendCheckpoint () {
-      let submission = await this.kele.submitCheckpoint(
+      let submission = await this.bloc.submitCheckpoint(
         checkpointIdInput.value,
         assignmentBranchInput.value,
         assignmentLinkInput.value,
@@ -257,7 +251,6 @@ class KeleView {
     })
   }
 
-
   async setupMessagesView () {
     const messagesGet = document.getElementById('messages-get')
     const threadsPage = document.getElementById('messages-page')
@@ -267,7 +260,7 @@ class KeleView {
       threadsView.className = ''
       threadsView.innerHTML = ''
 
-      const messagesObject = await this.kele.getMessages(threadsPage.value)
+      const messagesObject = await this.bloc.getMessages(threadsPage.value)
 
       if (messagesObject) {
         const countBox = document.createElement('p')
@@ -320,7 +313,7 @@ class KeleView {
     const messageSuccess = document.getElementById('message-success')
 
     async function sendMessage () {
-      let message = await this.kele.createMessage(
+      let message = await this.bloc.createMessage(
         threadInput.value,
         recipientInput.value,
         subjectInput.value,
@@ -347,7 +340,6 @@ class KeleView {
     })
   }
 
-  
   async initialize () {
     await this.initializeView()
     await this.setupMentorView()
@@ -357,3 +349,4 @@ class KeleView {
   }
 }
 
+module.exports = BlocView

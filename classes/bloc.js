@@ -1,8 +1,6 @@
-/*
-
 // This class manages 'GET' and 'POST' interaction with the Bloc API.
 
-class Kele {
+class Bloc {
   constructor() {
     this.baseUrl = 'https://www.bloc.io/api/v1'
     this.authToken = null
@@ -174,3 +172,5 @@ class Kele {
     catch(error) { console.log(error) }
   }
 }
+
+module.exports = Bloc
