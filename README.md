@@ -71,12 +71,12 @@ It has a minimalist file structure.
 
 #### Main Tabletop
 
-<img alt="tabletop main 1" src="./images/top-1.png" width="75%" align="center">
-<img alt="tabletop main 2" src="./images/top-2.png" width="75%" align="center">
-<img alt="tabletop main 3" src="./images/top-3.png" width="75%" align="center">
-<img alt="tabletop main 3" src="./images/top-4.png" width="75%" align="center">
+<img alt="tabletop main 1" src="/images/top-1.png" width="75%" align="center">
+<img alt="tabletop main 2" src="/images/top-2.png" width="75%" align="center">
+<img alt="tabletop main 3" src="/images/top-3.png" width="75%" align="center">
+<img alt="tabletop main 3" src="/images/top-4.png" width="75%" align="center">
 
 #### Scheduling
 
-<img alt="tabletop scheduling 1" src="./images/scheduling-1.png" width="75%" align="center">
-<img alt="tabletop scheduling 2" src="./images/scheduling-2.png" width="75%" align="center">
+<img alt="tabletop scheduling 1" src="/images/scheduling-1.png" width="60%" align="center">
+<img alt="tabletop scheduling 2" src="/images/scheduling-2.png" width="60%" align="center">
