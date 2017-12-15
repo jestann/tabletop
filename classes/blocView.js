@@ -2,7 +2,7 @@
 
 class BlocView {
   constructor() {
-    const Bloc = require('./classes/bloc')
+    const Bloc = require('./bloc.js')
     this.bloc = new Bloc()
   }
 
