@@ -14,7 +14,7 @@ Tabletop offers easy functionality with rainbow-colored good vibes. Students can
 ### Project Objectives
 
 - Students can log in to the Bloc Educational system.
-- Students can view roadmaps.
+- Students can view course roadmaps.
 - Students can look up individual project guidelines.
 - Students can check and send messages.
 - Students can submit projects.
@@ -30,13 +30,11 @@ $ npm install
 $ electron .
 ```
 
-This opens a local instance of Chrome using `Chromium` in which to render the app.
+This opens a local instance of Chrome using `Electron` and `Chromium` in which it renders the app.
 
 ### Configuration Variables
 
 **Note:** This app requires valid student user credentials for the Bloc API in order to generate the app dashboard.
-
-A link to a test-drive version of this app without required credentials is below.
 
 ### File Structure
 
@@ -46,6 +44,8 @@ This is a minimalist app built to visualize an educational API.
 ├── classes
 │   ├── tabletopAPI.js
 │   └── tabletopView.js
+├── images
+│   └── ...
 ├── scripts
 │   └── renderer.js
 ├── styles
@@ -60,29 +60,23 @@ This is a minimalist app built to visualize an educational API.
 
 It has a minimalist file structure.
 
-- `classes/tabletopAIP.js` defines customized fetch methods for the Bloc API. 
-- `classes/tabletopView.js` defines custom view methods for these calls.
+- `classes/tabletopAIP.js` defines customized fetch methods against the Bloc API. 
+- `classes/tabletopView.js` defines custom view methods for these calls in Javascript.
 - `scripts/renderer.js` is called by `Electron` from `index.html` when rendering the app in the generated instance of Chrome.
 - `styles/main.css` defines styling for the app.
 - `index.html` holds the html structure of the app interface.
 - `main.js` configures the behavior of the `Electron` app.
 
-### Implementation
-
-A test-drive web rendering of the app (no authentication) can be viewed [here](https://jestann-tabletop.herokuapp.com).
-
-### Case Study
-
-A description of the project case study exists [here](http://jessbird.me/portfolio/tabletop.html).
-
 ### Visuals
 
-#### Main Dashboard
+#### Main Tabletop
 
-<img alt="tabletop main 1" src="images/main-1.png" width="75%" align="center">
-<img alt="tabletop main 2" src="images/main-2.png" width="75%" align="center">
-<img alt="tabletop main 3" src="images/main-3.png" width="75%" align="center">
+<img alt="tabletop main 1" src="./images/top-1.png" width="75%" align="center">
+<img alt="tabletop main 2" src="./images/top-2.png" width="75%" align="center">
+<img alt="tabletop main 3" src="./images/top-3.png" width="75%" align="center">
+<img alt="tabletop main 3" src="./images/top-4.png" width="75%" align="center">
 
 #### Scheduling
 
-<img alt="tabletop scheduling" src="images/scheduling.png" width="75%" align="center">
+<img alt="tabletop scheduling 1" src="./images/scheduling-1.png" width="75%" align="center">
+<img alt="tabletop scheduling 2" src="./images/scheduling-2.png" width="75%" align="center">
